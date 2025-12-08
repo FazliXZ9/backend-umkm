@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\CompanyProfileResource\Pages;
 
 use App\Filament\Resources\CompanyProfileResource;
-use Filament\Actions;
+use Filament\Actions; // <--- Pastikan ini ada
 use Filament\Resources\Pages\EditRecord;
 
 class EditCompanyProfile extends EditRecord
@@ -15,5 +15,10 @@ class EditCompanyProfile extends EditRecord
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

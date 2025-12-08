@@ -10,10 +10,9 @@ class EditService extends EditRecord
 {
     protected static string $resource = ServiceResource::class;
 
-    protected function getHeaderActions(): array
+    // Tambahkan fungsi ini untuk redirect ke halaman Index setelah Save Changes
+    protected function getRedirectUrl(): string
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        return $this->getResource()::getUrl('index');
     }
 }

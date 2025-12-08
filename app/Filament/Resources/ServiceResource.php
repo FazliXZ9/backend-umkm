@@ -3,19 +3,21 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
-use App\Filament\Resources\ServiceResource\RelationManagers;
+// use App\Filament\Resources\ServiceResource\RelationManagers;
 use App\Models\Service;
-use Filament\Forms;
+// use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+// use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 
 class ServiceResource extends Resource
 {
@@ -32,14 +34,15 @@ class ServiceResource extends Resource
                     ->options([
                         'Steam' => 'Steam',
                         'Sablon' => 'Sablon',
-                        'Culinary' => 'Culinary',
+                        'Kuliner' => 'Kuliner',
                         'Konter' => 'Konter',
-                        'Web Dev' => 'Web Dev',
                     ])->required(),
                 Textarea::make('description')->required(),
                 FileUpload::make('image_path')
                     ->image()
-                    ->directory('services') // Simpan di folder storage/app/public/services
+                    ->directory('services')
+                    ->disk('public') // <--- Tambahkan baris ini
+                    ->visibility('public') // <--- Tambahkan baris ini (opsional tapi bagus)
                     ->required(),
             ]);
     }
@@ -48,13 +51,28 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                //
+                // Menampilkan Gambar Kecil
+                ImageColumn::make('image_path')
+                    ->label('Foto')
+                    ->disk('public'), // Pastikan disk sesuai setting upload
+
+                // Menampilkan Judul
+                TextColumn::make('title')
+                    ->label('Nama Layanan')
+                    ->sortable()
+                    ->searchable(),
+
+                // Menampilkan Kategori
+                TextColumn::make('category')
+                    ->label('Kategori')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(), // Tambahkan tombol delete jika perlu
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
