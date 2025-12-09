@@ -11,10 +11,7 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-        // Ambil data profil (ambil yang pertama aja)
         $profile = CompanyProfile::first();
-
-        // Ambil semua layanan
         $services = Service::all();
 
         return response()->json([
@@ -22,7 +19,6 @@ class LandingPageController extends Controller
             'data' => [
                 'profile' => $profile,
                 'services' => $services,
-                // Helper agar frontend tau base URL gambar
                 'image_base_url' => asset('storage/'), 
             ]
         ]);

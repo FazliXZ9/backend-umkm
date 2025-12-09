@@ -10,7 +10,6 @@ class EditService extends EditRecord
 {
     protected static string $resource = ServiceResource::class;
 
-    // Tambahkan fungsi ini untuk redirect ke halaman Index setelah Save Changes
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\CompanyProfileResource\Pages;
+namespace App\Filament\Resources\UserResource\Pages;
 
-use App\Filament\Resources\CompanyProfileResource;
-use Filament\Actions; 
+use App\Filament\Resources\UserResource;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Actions;
 
-class EditCompanyProfile extends EditRecord
+class EditUser extends EditRecord
 {
-    protected static string $resource = CompanyProfileResource::class;
+    protected static string $resource = UserResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -16,7 +16,7 @@ class EditCompanyProfile extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
+    
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

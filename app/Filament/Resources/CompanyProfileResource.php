@@ -18,27 +18,25 @@ class CompanyProfileResource extends Resource
 {
     protected static ?string $model = CompanyProfile::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office'; // Ikon gedung (opsional)
+    protected static ?string $navigationIcon = 'heroicon-o-building-office'; 
     protected static ?string $navigationLabel = 'Profil UMKM';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                // Input Foto
                 FileUpload::make('image_path')
                     ->label('Foto UMKM')
                     ->image()
-                    ->disk('public') // Wajib: agar bisa diakses frontend
-                    ->directory('company') // Disimpan di folder storage/app/public/company
+                    ->disk('public') 
+                    ->directory('company') 
                     ->required()
-                    ->columnSpanFull(), // Agar lebar penuh
+                    ->columnSpanFull(),
 
-                // Input Deskripsi
                 Textarea::make('about_description')
                     ->label('Deskripsi About Us')
                     ->required()
-                    ->rows(10) // Agar kotaknya tinggi
+                    ->rows(10) 
                     ->columnSpanFull(),
             ]);
     }
@@ -47,15 +45,13 @@ class CompanyProfileResource extends Resource
     {
         return $table
             ->columns([
-                // Menampilkan Thumbnail Foto
                 ImageColumn::make('image_path')
                     ->label('Foto')
                     ->disk('public'),
 
-                // Menampilkan Potongan Deskripsi
                 TextColumn::make('about_description')
                     ->label('Deskripsi')
-                    ->limit(50) // Hanya tampilkan 50 huruf pertama
+                    ->limit(50) 
                     ->searchable(),
 
                 TextColumn::make('updated_at')

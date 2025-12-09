@@ -10,7 +10,6 @@ class CreateCompanyProfile extends CreateRecord
 {
     protected static string $resource = CompanyProfileResource::class;
 
-    // Tambahkan fungsi ini agar setelah 'Create' balik ke tabel list
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
