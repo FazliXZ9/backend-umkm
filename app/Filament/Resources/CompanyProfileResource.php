@@ -75,8 +75,6 @@ class CompanyProfileResource extends Resource
             ]);
     }
 
-    // ... sisa method lainnya biarkan default
-
     public static function getRelations(): array
     {
         return [
