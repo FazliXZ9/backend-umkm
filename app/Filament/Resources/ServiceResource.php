@@ -41,7 +41,7 @@ class ServiceResource extends Resource
                 FileUpload::make('image_path')
                     ->image()
                     ->directory('services')
-                    ->disk('public') // <--- Tambahkan baris ini
+                    ->disk('s3') // <--- Tambahkan baris ini
                     ->visibility('public') // <--- Tambahkan baris ini (opsional tapi bagus)
                     ->required(),
             ]);
@@ -54,7 +54,7 @@ class ServiceResource extends Resource
                 // Menampilkan Gambar Kecil
                 ImageColumn::make('image_path')
                     ->label('Foto')
-                    ->disk('public'), // Pastikan disk sesuai setting upload
+                    ->disk('s3'), // Pastikan disk sesuai setting upload
 
                 // Menampilkan Judul
                 TextColumn::make('title')
