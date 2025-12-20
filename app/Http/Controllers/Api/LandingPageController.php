@@ -19,7 +19,7 @@ class LandingPageController extends Controller
             'data' => [
                 'profile' => $profile,
                 'services' => $services,
-                'image_base_url' => asset('storage/'), 
+                'image_base_url' => config('filesystems.disks.s3.url'),
             ]
         ]);
     }
