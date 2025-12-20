@@ -18,7 +18,7 @@ class CompanyProfileResource extends Resource
 {
     protected static ?string $model = CompanyProfile::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office'; 
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
     protected static ?string $navigationLabel = 'Profil UMKM';
 
     public static function form(Form $form): Form
@@ -28,15 +28,15 @@ class CompanyProfileResource extends Resource
                 FileUpload::make('image_path')
                     ->label('Foto UMKM')
                     ->image()
-                    ->disk('public') 
-                    ->directory('company') 
+                    ->disk('s3')
+                    ->directory('company')
                     ->required()
                     ->columnSpanFull(),
 
                 Textarea::make('about_description')
                     ->label('Deskripsi About Us')
                     ->required()
-                    ->rows(10) 
+                    ->rows(10)
                     ->columnSpanFull(),
             ]);
     }
@@ -47,11 +47,11 @@ class CompanyProfileResource extends Resource
             ->columns([
                 ImageColumn::make('image_path')
                     ->label('Foto')
-                    ->disk('public'),
+                    ->disk('s3'),
 
                 TextColumn::make('about_description')
                     ->label('Deskripsi')
-                    ->limit(50) 
+                    ->limit(50)
                     ->searchable(),
 
                 TextColumn::make('updated_at')
